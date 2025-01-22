@@ -1,5 +1,5 @@
 {
-    "name": "onetoweb/unit4",
+    "name": "fivefm/unit4",
     "description": "Unit4 API Client",
     "keywords": [
         "api",
@@ -7,7 +7,7 @@
         "unit4"
     ],
     "type": "library",
-    "homepage": "https://github.com/onetoweb/unit4",
+    "homepage": "https://github.com/fivefm/unit4",
     "authors": [
         {
             "name": "Jonathan van 't Ende",

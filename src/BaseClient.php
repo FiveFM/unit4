@@ -23,52 +23,52 @@ class BaseClient
     const METHOD_POST = 'POST';
     const METHOD_PUT = 'PUT';
     const METHOD_DELETE = 'DELETE';
-    
+
     /**
      * @var string
      */
     private $clientId;
-    
+
     /**
      * @var string
      */
     private $clientSecret;
-    
+
     /**
      * @var string
      */
     private $redirectUrl;
-    
+
     /**
      * @var int
      */
     private $version;
-    
+
     /**
      * @var bool
      */
     private $sandbox;
-    
+
     /**
      * @var string
      */
     private $baseUrl;
-    
+
     /**
      * @var Token
      */
     private $token;
-    
+
     /**
      * @var callable
      */
     private $updateTokenCallback;
-    
+
     /**
      * @var string
      */
     protected $database;
-    
+
     /**
      * @param string $clientId
      * @param string $clientSecret
@@ -83,17 +83,17 @@ class BaseClient
         $this->redirectUrl = $redirectUrl;
         $this->version = $version;
         $this->sandbox = $sandbox;
-        
+
         // build base uri
         if ($this->sandbox) {
-            $this->baseUrl = 'https://sandbox-api.multivers.nl';
+            $this->baseUrl = 'https://sandbox-api.boekhoudgemak.nl';
         } else {
-            $this->baseUrl = 'https://api.multivers.nl';
+            $this->baseUrl = 'https://api.boekhoudgemak.nl';
         }
-        
-        $this->baseUrl .= '/V'.$this->version;
+
+        $this->baseUrl .= '/V' . $this->version;
     }
-    
+
     /**
      * @param string $database
      * 
@@ -103,7 +103,7 @@ class BaseClient
     {
         $this->database = $database;
     }
-    
+
     /**
      * @param $state = null
      * 
@@ -117,14 +117,14 @@ class BaseClient
             'scope' => 'http://UNIT4.Multivers.API/Web/WebApi/*',
             'response_type' => 'code',
         ];
-        
+
         if ($state !== null) {
             $query['state'] = $state;
         }
-        
-        return $this->baseUrl.'/OAuth/Authorize?' . http_build_query($query);
+
+        return $this->baseUrl . '/OAuth/Authorize?' . http_build_query($query);
     }
-    
+
     /**
      * @param string $code
      * 
@@ -139,10 +139,10 @@ class BaseClient
             'redirect_uri' => $this->redirectUrl,
             'grant_type' => 'authorization_code'
         ], [], false);
-        
+
         $this->updateToken($token);
     }
-    
+
     /**
      * @return void
      */
@@ -155,10 +155,10 @@ class BaseClient
             'redirect_uri' => $this->redirectUrl,
             'grant_type' => 'refresh_token'
         ], [], false);
-        
+
         $this->updateToken($token);
     }
-    
+
     /**
      * @param callable $updateTokenCallback
      */
@@ -166,7 +166,7 @@ class BaseClient
     {
         $this->updateTokenCallback = $updateTokenCallback;
     }
-    
+
     /**
      * @param array $tokenArray
      * 
@@ -177,15 +177,15 @@ class BaseClient
         // get expires
         $expires = new DateTime();
         $expires->setTimestamp(time() + $tokenArray['expires_in']);
-        
+
         $token = new Token($tokenArray['access_token'], $tokenArray['refresh_token'], $expires);
-        
+
         $this->setToken($token);
-        
+
         // token update callback
         ($this->updateTokenCallback)($this->getToken());
     }
-    
+
     /**
      * @param Token $token
      * 
@@ -195,7 +195,7 @@ class BaseClient
     {
         $this->token = $token;
     }
-    
+
     /**
      * @return Token
      */
@@ -203,7 +203,7 @@ class BaseClient
     {
         return $this->token;
     }
-    
+
     /**
      * @param string $endpoint
      * @param array $query = []
@@ -214,7 +214,7 @@ class BaseClient
     {
         return $this->request(self::METHOD_GET, $endpoint, [], $query, true, $decode);
     }
-    
+
     /**
      * @param string $endpoint
      * @param array $data = []
@@ -227,7 +227,7 @@ class BaseClient
     {
         return $this->request(self::METHOD_POST, $endpoint, $data, $query, $json);
     }
-    
+
     /**
      * @param string $endpoint
      * @param array $data = []
@@ -240,7 +240,7 @@ class BaseClient
     {
         return $this->request(self::METHOD_PUT, $endpoint, $data, $query, $json);
     }
-    
+
     /**
      * @param string $endpoint
      * @param array $query = []
@@ -251,7 +251,7 @@ class BaseClient
     {
         return $this->request(self::METHOD_DELETE, $endpoint, [], $query);
     }
-    
+
     /**
      * @param string $method
      * @param string $endpoint
@@ -271,82 +271,77 @@ class BaseClient
             'Connection' => 'close',
             'Accept' => 'application/json',
         ];
-        
+
         if ($this->getToken() !== null and $endpoint !== '/OAuth/Token') {
-            
+
             if ($this->getToken()->isExpired()) {
-                
+
                 $this->requestRefreshToken();
-                
             }
-            
+
             // add bearer token authorization header
             $headers['Authorization'] = "Bearer {$this->getToken()->getAccessToken()}";
-            
         }
-        
+
         try {
-            
+
             //  add headers to request options
             $options[RequestOptions::HEADERS] = $headers;
-            
+
             // add post data body
             if (in_array($method, [self::METHOD_POST, self::METHOD_PUT])) {
-                
+
                 if ($json) {
                     $options[RequestOptions::JSON] = $data;
                 } else {
                     $options[RequestOptions::FORM_PARAMS] = $data;
                 }
-                
             }
-            
+
             // build query 
             if (count($query) > 0) {
                 $endpoint .= '?' . http_build_query($query);
             }
-            
+
             // build guzzle client
             $guzzleClient = new GuzzleClient([
                 RequestOptions::VERIFY => false,
-                
+
             ]);
-            
+
             // build guzzle request
             $result = $guzzleClient->request($method, $this->baseUrl . $endpoint, $options);
-            
+
             // get contents
             $contents = $result->getBody()->getContents();
-            
+
             // return data
             if ($decode) {
                 return json_decode($contents, true);
             } else {
                 return $contents;
             }
-            
-        } catch (GuzzleRequestException|ClientException $guzzleException) {
-            
+        } catch (GuzzleRequestException | ClientException $guzzleException) {
+
             if ($guzzleException->hasResponse()) {
-                
+
                 $contents = $guzzleException->getResponse()->getBody()->getContents();
-                
+
                 // check if contents contains json string
                 json_decode($contents);
                 if (json_last_error() === JSON_ERROR_NONE) {
-                    
+
                     // return error response as exception message
                     throw new RequestException($contents, $guzzleException->getCode(), $guzzleException);
-                    
                 }
             }
-            
+
             throw $guzzleException;
         }
-        
+
         return null;
     }
-    
+
     /**
      * @param string $function
      *  
@@ -355,7 +350,7 @@ class BaseClient
     protected function checkRequiredDatabase(string $function = null)
     {
         if ($this->database === null) {
-            
+
             if ($function !== null) {
                 throw new DatabaseException("Client::$function requires a database to be set, use Client::setDatabase");
             } else {
