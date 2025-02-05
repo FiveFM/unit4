@@ -1,6 +1,6 @@
 <?php
 
-namespace Onetoweb\Unit4;
+namespace Fivefm\Unit4;
 
 use DateTime;
 
@@ -16,17 +16,17 @@ class Token
      * @var string
      */
     private $accessToken;
-    
+
     /**
      * @var string
      */
     private $refreshToken;
-    
+
     /**
      * @var DateTime
      */
     private $expires;
-    
+
     /**
      * @param string $accessToken
      * @param string $refreshToken
@@ -38,7 +38,7 @@ class Token
         $this->refreshToken = $refreshToken;
         $this->expires = $expires;
     }
-    
+
     /**
      * @return string
      */
@@ -46,7 +46,7 @@ class Token
     {
         return $this->accessToken;
     }
-    
+
     /**
      * @return string
      */
@@ -54,7 +54,7 @@ class Token
     {
         return $this->refreshToken;
     }
-    
+
     /**
      * @return string
      */
@@ -62,7 +62,7 @@ class Token
     {
         return $this->expires;
     }
-    
+
     /**
      * @return bool
      */

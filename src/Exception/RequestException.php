@@ -1,11 +1,7 @@
 <?php
 
-namespace Onetoweb\Unit4\Exception;
+namespace Fivefm\Unit4\Exception;
 
 use Exception;
 
-class RequestException extends Exception
-{
-    
-    
-}
+class RequestException extends Exception {}

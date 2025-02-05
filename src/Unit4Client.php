@@ -1,8 +1,8 @@
 <?php
 
-namespace Onetoweb\Unit4;
+namespace Fivefm\Unit4;
 
-use Onetoweb\Unit4\BaseClient;
+use Fivefm\Unit4\BaseClient;
 
 /**
  * Unit4 Api Client.
@@ -25,7 +25,7 @@ class Unit4Client extends BaseClient
     {
         return $this->get("/api/AdministrationInfoList", $query);
     }
-    
+
     /**
      * @param array $query = []
      *
@@ -36,10 +36,10 @@ class Unit4Client extends BaseClient
     public function getProductInfoList(array $query = []): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/ProductInfoList", $query);
     }
-    
+
     /**
      * @param array $data = []
      *
@@ -50,10 +50,10 @@ class Unit4Client extends BaseClient
     public function createProduct(array $data = []): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->post("/api/{$this->database}/Product", $data);
     }
-    
+
     /**
      * @param string $productId
      *
@@ -64,10 +64,10 @@ class Unit4Client extends BaseClient
     public function getProduct(string $productId): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/Product/{$productId}");
     }
-    
+
     /**
      * @param array $query = []
      *
@@ -78,10 +78,10 @@ class Unit4Client extends BaseClient
     public function getCustomerInfoList(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/CustomerInfoList");
     }
-    
+
     /**
      * @param $id
      *
@@ -92,10 +92,10 @@ class Unit4Client extends BaseClient
     public function getCustomer($id): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/Customer/$id");
     }
-    
+
     /**
      * @param array $data = []
      * 
@@ -106,10 +106,10 @@ class Unit4Client extends BaseClient
     public function createCustomer(array $data = []): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->post("/api/{$this->database}/Customer", $data);
     }
-    
+
     /**
      * @return array|null
      * 
@@ -118,10 +118,10 @@ class Unit4Client extends BaseClient
     public function getCompanyContactPersonList(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/CompanyContactPersonList");
     }
-    
+
     /**
      * @param string $organizationId
      * 
@@ -132,10 +132,10 @@ class Unit4Client extends BaseClient
     public function getAddressList(string $organizationId): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/AddressList/$organizationId");
     }
-    
+
     /**
      * @param array $data = []
      * 
@@ -146,11 +146,10 @@ class Unit4Client extends BaseClient
     public function createAddress(array $data = [])
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->post("/api/{$this->database}/Address", $data);
-        
     }
-    
+
     /**
      * @param array $data = []
      *
@@ -161,10 +160,10 @@ class Unit4Client extends BaseClient
     public function createOrder(array $data = []): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->post("/api/{$this->database}/Order", $data);
     }
-    
+
     /**
      * @param array $query = []
      *
@@ -175,10 +174,10 @@ class Unit4Client extends BaseClient
     public function getOrderInfoListOpenOrders(array $query = []): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/OrderInfoList/OpenOrders", $query);
     }
-    
+
     /**
      * @param array $query = []
      *
@@ -189,10 +188,10 @@ class Unit4Client extends BaseClient
     public function getOrderInfoListOrdersReadyToPrintInvoice(array $query = []): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/OrderInfoList/OrdersReadyToPrintInvoice", $query);
     }
-    
+
     /**
      * @return array|null
      *
@@ -201,10 +200,10 @@ class Unit4Client extends BaseClient
     public function getOrderStateNVL(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/OrderStateNVL");
     }
-    
+
     /**
      * @return array|null
      *
@@ -213,10 +212,10 @@ class Unit4Client extends BaseClient
     public function getOrderTypeNVL(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/OrderTypeNVL");
     }
-    
+
     /**
      * @param string $orderId
      *
@@ -227,10 +226,10 @@ class Unit4Client extends BaseClient
     public function getOrder(string $orderId): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/Order/{$orderId}");
     }
-    
+
     /**
      * @param array $query = []
      *
@@ -241,10 +240,10 @@ class Unit4Client extends BaseClient
     public function processOrderCommand(array $query = []): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->post("/api/{$this->database}/ProcessOrderCommand", [], $query);
     }
-    
+
     /**
      * @param array $query = []
      *
@@ -255,10 +254,10 @@ class Unit4Client extends BaseClient
     public function getShippingOrderDocumentCommand(array $query = []): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/GetShippingOrderDocumentCommand", $query);
     }
-    
+
     /**
      * @return array|null
      * 
@@ -267,10 +266,10 @@ class Unit4Client extends BaseClient
     public function getOrderLineTypeNVL(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/OrderLineTypeNVL");
     }
-    
+
     /**
      * @param $id
      * 
@@ -281,10 +280,10 @@ class Unit4Client extends BaseClient
     public function deleteCustomer($id): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->delete("/api/{$this->database}/Customer/$id");
     }
-    
+
     /**
      * @return array|null
      * 
@@ -293,10 +292,10 @@ class Unit4Client extends BaseClient
     public function getFiscalYearInfoList(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/FiscalYearInfoList");
     }
-    
+
     /**
      * @return array|null
      * 
@@ -305,10 +304,10 @@ class Unit4Client extends BaseClient
     public function getJournalInfoList(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/JournalInfoList");
     }
-    
+
     /**
      * @param $journalId
      * @param $fiscalYear
@@ -320,10 +319,10 @@ class Unit4Client extends BaseClient
     public function getJournalTransactionInfoList($journalId, $fiscalYear): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/JournalTransactionInfoList/$journalId/$fiscalYear");
     }
-    
+
     /**
      * @return array|null
      * 
@@ -332,10 +331,10 @@ class Unit4Client extends BaseClient
     public function getJournalTypeNVL(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/JournalTypeNVL");
     }
-    
+
     /**
      * @return array|null
      * 
@@ -344,10 +343,10 @@ class Unit4Client extends BaseClient
     public function getMailMessageInfoList(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/MailMessageInfoList");
     }
-    
+
     /**
      * @param string $configId
      * 
@@ -358,10 +357,10 @@ class Unit4Client extends BaseClient
     public function getReportTemplateConfiguration(string $configId): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/ReportTemplateConfiguration/$configId");
     }
-    
+
     /**
      * @return array|null
      * 
@@ -370,10 +369,10 @@ class Unit4Client extends BaseClient
     public function getReportTemplateConfigurationList(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/ReportTemplateConfigurationList");
     }
-    
+
     /**
      * @return array|null
      * 
@@ -382,10 +381,10 @@ class Unit4Client extends BaseClient
     public function getMailTemplateList(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/MailTemplateList");
     }
-    
+
     /**
      * @return array|null
      * 
@@ -394,10 +393,10 @@ class Unit4Client extends BaseClient
     public function getPaymentConditionInfoList(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/PaymentConditionInfoList");
     }
-    
+
     /**
      * @return array|null
      * 
@@ -406,10 +405,10 @@ class Unit4Client extends BaseClient
     public function getPeriodInfoList(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/PeriodInfoList");
     }
-    
+
     /**
      * @param array $data = []
      * 
@@ -420,10 +419,10 @@ class Unit4Client extends BaseClient
     public function createCustomerInvoice(array $data = []): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->post("/api/{$this->database}/CustomerInvoice", $data);
     }
-    
+
     /**
      * @param string $invoiceId
      *
@@ -434,10 +433,10 @@ class Unit4Client extends BaseClient
     public function getCustomerInvoice(string $invoiceId): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/CustomerInvoice/$invoiceId");
     }
-    
+
     /**
      * @param int $fiscalYear
      * @param int $invoiceState
@@ -449,10 +448,10 @@ class Unit4Client extends BaseClient
     public function getCustomerInvoiceInfoListByFiscalYear(int $fiscalYear, int $invoiceState): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/CustomerInvoiceInfoList/ByFiscalYear/$fiscalYear/$invoiceState");
     }
-    
+
     /**
      * @param string $orderId
      * @param array $query = []
@@ -464,10 +463,10 @@ class Unit4Client extends BaseClient
     public function getDocumentInvoiceByOrderId(string $orderId, array $query = [])
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/Documents/Invoice/ByOrderId/$orderId", $query, false);
     }
-    
+
     /**
      * @param string $invoiceId
      * @param array $query = []
@@ -479,10 +478,10 @@ class Unit4Client extends BaseClient
     public function getDocumentInvoiceByInvoiceId(string $invoiceId, array $query = [])
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/Documents/Invoice/$invoiceId", $query, false);
     }
-    
+
     /**
      * @param string $orderId
      * @param array $query = []
@@ -494,10 +493,10 @@ class Unit4Client extends BaseClient
     public function getDocumentOrder(string $orderId, array $query = [])
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/Documents/Order/$orderId", $query, false);
     }
-    
+
     /**
      * @param string $orderId
      * @param array $query = []
@@ -509,10 +508,10 @@ class Unit4Client extends BaseClient
     public function getDocumentInvoiceByOrderIdForWeb(string $orderId, array $query = [])
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/Documents/Invoice/ByOrderIdForWeb/$orderId", $query, false);
     }
-    
+
     /**
      * @param string $invoiceId
      * @param array $query = []
@@ -524,10 +523,10 @@ class Unit4Client extends BaseClient
     public function getDocumentInvoiceForWeb(string $invoiceId, array $query = [])
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/Documents/Invoice/ForWeb/$invoiceId", $query, false);
     }
-    
+
     /**
      * @param int $fiscalYear
      *
@@ -538,10 +537,10 @@ class Unit4Client extends BaseClient
     public function getAccountInfoList(int $fiscalYear): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/AccountInfoList/$fiscalYear");
     }
-    
+
     /**
      * @return array|null
      * 
@@ -550,10 +549,10 @@ class Unit4Client extends BaseClient
     public function getAccountCategoryNVL(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/AccountCategoryNVL");
     }
-    
+
     /**
      * @return array|null
      * 
@@ -562,10 +561,10 @@ class Unit4Client extends BaseClient
     public function getAccountManagerNVL(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/AccountManagerNVL");
     }
-    
+
     /**
      * @return array|null
      * 
@@ -574,10 +573,10 @@ class Unit4Client extends BaseClient
     public function getDocumentTypeInfoList(): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/DocumentTypeInfoList");
     }
-    
+
     /**
      * @param int $type
      * 
@@ -588,10 +587,10 @@ class Unit4Client extends BaseClient
     public function getDocumentTypeInfo(int $type): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/DocumentTypeInfo/$type");
     }
-    
+
     /**
      * @param array $query = []
      *
@@ -602,10 +601,10 @@ class Unit4Client extends BaseClient
     public function getNextJournalTransactionCommand(array $query = []): ?int
     {
         $nextJournalTransaction = $this->post("/api/{$this->database}/GetNextJournalTransactionCommand", [], $query);
-        
+
         return $nextJournalTransaction['nextJournalTransaction'];
     }
-    
+
     /**
      * @param array $data = []
      *
@@ -616,10 +615,10 @@ class Unit4Client extends BaseClient
     public function createFinTrans(array $data = []): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->post("/api/{$this->database}/FinTrans", $data);
     }
-    
+
     /**
      * @param int $fiscalYear
      * @param string $journalId
@@ -632,10 +631,10 @@ class Unit4Client extends BaseClient
     public function getFinTrans(int $fiscalYear, string $journalId, string $journalTransaction): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/FinTrans/$fiscalYear/$journalId/$journalTransaction");
     }
-    
+
     /**
      * @param array $query
      *
@@ -646,10 +645,10 @@ class Unit4Client extends BaseClient
     public function approveInvoicePaymentCommand(array $query): ?array
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->post("/api/{$this->database}/ApproveInvoicePaymentCommand", [], $query);
     }
-    
+
     /**
      * @return array|null
      * 
@@ -658,7 +657,7 @@ class Unit4Client extends BaseClient
     public function getCompanyDetails()
     {
         $this->checkRequiredDatabase(__FUNCTION__);
-        
+
         return $this->get("/api/{$this->database}/CompanyDetails");
     }
 }
