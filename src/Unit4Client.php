@@ -28,6 +28,92 @@ class Unit4Client extends BaseClient
 
     /**
      * @param array $query = []
+     * 
+     * @return array|null
+     * 
+     * @link https://api.multivers.nl/V22/Help/Api/GET-api-database-VatCodeInfoList
+     */
+    public function getVatCodeInfoList(array $query = []): ?array
+    {
+        $this->checkRequiredDatabase(__FUNCTION__);
+
+        return $this->get("/api/{$this->database}/VatCodeInfoList", $query);
+    }
+
+    /**
+     * @param string fiscalYear
+     * @param string startDate
+     * @param string endDate
+     * 
+     * @return array|null
+     * 
+     * @link https://api.multivers.nl/V22/Help/Api/GET-api-database-JournalEntryLineInfoList-ByDate-fiscalYear-startDate-endDate
+     */
+    public function getJournalEntryLineInfoList($fiscalYear, $startDate, $endDate): ?array
+    {
+        $this->checkRequiredDatabase(__FUNCTION__);
+
+        return $this->get("/api/{$this->database}/JournalEntryLineInfoList/ByDate/$fiscalYear/$startDate/$endDate");
+    }
+
+    /**
+     *
+     * @return array|null
+     * 
+     * @link https://api.multivers.nl/V22/Help/Api/GET-api-database-SupplierInfoList
+     */
+    public function getSupplierInfoList(): ?array
+    {
+        $this->checkRequiredDatabase(__FUNCTION__);
+
+        return $this->get("/api/{$this->database}/SupplierInfoList");
+    }
+
+
+    /**
+     * @param array $data = []
+     * 
+     * @return array|null
+     * 
+     * @link https://api.multivers.nl/V22/Help/Api/POST-api-database-SupplierInvoice
+     */
+    public function createSupplierInvoice(array $data = []): ?array
+    {
+        $this->checkRequiredDatabase(__FUNCTION__);
+
+        return $this->post("/api/{$this->database}/SupplierInvoice", $data);
+    }
+
+    /**
+     * @param string $id
+     * 
+     * @return array|null
+     * 
+     * @link https://api.multivers.nl/V22/Help/Api/GET-api-database-SupplierInvoice-invoiceId
+     */
+    public function deleteSupplierInvoice($id): ?array
+    {
+        $this->checkRequiredDatabase(__FUNCTION__);
+
+        return $this->delete("/api/{$this->database}/SupplierInvoice/$id");
+    }
+
+    /**
+     * @param array $data = []
+     * 
+     * @return array|null
+     * 
+     * @link https://api.multivers.nl/V22/Help/Api/POST-api-database-Supplier
+     */
+    public function createSupplier(array $data = []): ?array
+    {
+        $this->checkRequiredDatabase(__FUNCTION__);
+
+        return $this->post("/api/{$this->database}/Supplier", $data);
+    }
+
+    /**
+     * @param array $query = []
      *
      * @return array|null
      * 
@@ -38,6 +124,21 @@ class Unit4Client extends BaseClient
         $this->checkRequiredDatabase(__FUNCTION__);
 
         return $this->get("/api/{$this->database}/ProductInfoList", $query);
+    }
+    /**
+     * @param string $fiscalYear
+     * @param string $journalId
+     * @param string $journalTransaction
+     * 
+     * @return array|null
+     * 
+     * @link https://api.multivers.nl/V22/Help/Api/DELETE-api-database-FinTrans-fiscalYear-journalId-journalTransaction
+     */
+    public function deleteFinTrans($fiscalYear, $journalId, $journalTransaction): ?array
+    {
+        $this->checkRequiredDatabase(__FUNCTION__);
+
+        return $this->delete("/api/{$this->database}/FinTrans/$fiscalYear/$journalId/$journalTransaction");
     }
 
     /**
